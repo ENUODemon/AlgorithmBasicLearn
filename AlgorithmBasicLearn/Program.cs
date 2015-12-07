@@ -11,7 +11,7 @@ namespace AlgorithmBasicLearn
         static void Main(string[] args)
         {
             int[] lists = { 2, 66, 53, 54, 52, 76, 42, 33, 18, 99 };
-            lists = BasicSort.StrainghtInsertSort(lists);
+            lists = BasicSort.QuickSort(lists,0,lists.Count()-1);
 
             foreach (var l in lists)
             {

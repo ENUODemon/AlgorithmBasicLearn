@@ -78,6 +78,41 @@ namespace AlgorithmBasicLearn
             return a;
         }
 
+
+        //快速排序
+        public static int[] QuickSort(int[] arr, int left, int right) 
+        {
+            if (left < right) 
+            {
+                int i = Division(arr, left, right);
+
+                QuickSort(arr, left, i - 1);
+                QuickSort(arr, i + 1, right);
+            }
+            return arr;
+        }
+
+        private static int Division(int[] arr, int left, int right) 
+        {
+            int baseNum=arr[left];
+            while(left<right)
+            {
+                while (left < right &&arr[right] >= baseNum) 
+                {
+                    right--;
+                }
+                arr[left] = arr[right];
+
+                while (left < right && arr[left] <= baseNum) 
+                {
+                    left++;
+                }
+                arr[right] = arr[left];
+            }
+            arr[left] = baseNum;
+            return left;
+        }
+
         private static void swap(int[] arr, int pos, int offset)
         {
             int temp = arr[pos];
