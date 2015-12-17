@@ -92,6 +92,45 @@ namespace AlgorithmBasicLearn
             return arr;
         }
 
+        public  static int[] HeapSort(int[] a)
+        {
+            int t, i;
+            int j;
+            for (i = a.Length / 2 - 1; i >= 0; i--) 
+            {
+                HeapAdjust(a, i,a.Length);
+            }
+            for (i = a.Length - 1; i >= 0; i--) 
+            {
+                t = a[0];
+                a[0] = a[i];
+                a[i] = t;
+                HeapAdjust(a, 0,i);
+            }
+            return a;
+        }
+        public static int[] ShellSort(int[] a, int n)
+        {
+            int d, i, j, x;
+            d = n / 2;
+            while (d >= 1)
+            {
+                for (i = d; i < n; i++)
+                {
+                    x = a[i];
+                    j = i - d;
+                    while (j >= 0 && a[j] > x)
+                    {
+                        a[j + d] = a[j];
+                        j = j - d;
+                    }
+                    a[j + d] = x;
+                }
+                d /= 2;
+            }
+            return a;
+
+        }
         private static int Division(int[] arr, int left, int right) 
         {
             int baseNum=arr[left];
@@ -118,6 +157,114 @@ namespace AlgorithmBasicLearn
             int temp = arr[pos];
             arr[pos] = arr[offset];
             arr[offset] = temp;
+        }
+        private static void HeapAdjust(int[] a, int s,int n) 
+        {
+            int j, t;
+            while (2 * s + 1 < n) 
+            {
+                j=2*s+1;
+                if ((j + 1) < n) 
+                {
+                    if (a[j] < a[j + 1]) 
+                    {
+                        j++;
+                    }
+                  
+                }
+                if (a[s] < a[j])
+                {
+                    t = a[s];
+                    a[s] = a[j];
+                    a[j] = t;
+                    s = j;
+                }
+                else 
+                {
+                    break;
+                }
+            }
+        }
+
+        private static void MergeStep(int[] a, int[] r, int s, int m, int n) 
+        {
+            int i, j, k;
+            k = s;
+            i = s;
+            j = m + 1;
+            while (i <= m && j <= n) 
+            {
+                if (a[i] <= a[j])
+                {
+                    r[k++] = a[i++];
+                }
+                else 
+                {
+                    r[k++] = a[j++];
+                }
+            }
+            while (i <=m) 
+            {
+                r[k++] = a[i++];
+            }
+            while(j<=n)
+            
+            {
+                r[k++]=a[j++];
+            }
+
+        }
+        private static void MergePass(int[] a,int[] r,int n,int len)
+        {
+            int s,e;;
+            s=0;
+            while(s+len<n)
+            {
+                e=s+2*len-1;
+                if(e>=n)
+                {
+                    e=n-1;
+                }
+                MergeStep(a,r,s,s+len-1,e);
+                s=e+1;
+            }
+            if(s<n)
+            {
+                for(;s<n;s++)
+                {
+                    r[s]=a[s];
+                }
+            }
+        }
+
+        public static int[] MergeSort(int[] a,int n)
+        {
+            int[] p=new int[n];
+            int len=1;
+            int f=0;
+            while(len<n)
+            {
+                if (f == 0)
+                {
+                    MergePass(p, a, n, len);
+
+                }
+                else 
+                {
+                    MergePass(a, p, n, len);
+                }
+                len *= 2;
+                f = 1 - f;
+
+            }
+            if (f == 0) 
+            {
+                for (f = 0; f < n; f++) 
+                {
+                    a[f] = p[f];
+                }
+            }
+            return a;
         }
     }
 }
