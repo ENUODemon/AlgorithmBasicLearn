@@ -12,8 +12,6 @@ namespace AlgorithmBasicLearn
         {
             int[] lists = { 2, 66, 53, 54, 52, 76, 42, 33, 18, 99 };
             //lists = BasicSort.MergeSort(lists, lists.Count());
-
-
             foreach (var l in lists)
             {
                 Console.WriteLine(l);
