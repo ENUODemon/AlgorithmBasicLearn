@@ -18,6 +18,7 @@ namespace AlgorithmBasicLearn
             }
 
 
+
             Console.Read();
         }
 
