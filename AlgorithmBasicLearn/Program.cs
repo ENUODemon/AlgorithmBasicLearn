@@ -14,8 +14,6 @@ namespace AlgorithmBasicLearn
             //lists = BasicSort.MergeSort(lists, lists.Count());
 
 
-
-
             foreach (var l in lists)
             {
                 Console.WriteLine(l);
